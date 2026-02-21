@@ -161,6 +161,8 @@ async def executar_ciclo() -> None:
             registrador.registrar_log(f"{len(vagas_pontuadas)} vagas acima do threshold ({config.threshold_score}).")
 
         # ── 6. enviar alertas Telegram ────────────────────────────────────
+        telegram = NotificadorTelegram()
+
         if vagas_pontuadas and embedding_b64:
             # ordena por score desc
             vagas_pontuadas.sort(key=lambda x: x[1], reverse=True)
@@ -185,9 +187,22 @@ async def executar_ciclo() -> None:
                     )
                 )
 
-            telegram = NotificadorTelegram()
             notificadas = await telegram.enviar_alertas(alertas)
             registrador.registrar_log(f"{notificadas} alertas enviados no Telegram.")
+        elif embedding_b64 and novas_salvas > 0:
+            # Havia vagas novas, mas nenhuma atingiu o threshold
+            msg = (
+                f"🔍 *Ciclo concluído — nenhuma vaga compatível*\n"
+                f"━━━━━━━━━━━━━━━━━━━━\n"
+                f"📊 {novas_salvas} nova(s) vaga(s) coletada(s)\n"
+                f"❌ Nenhuma atingiu o score mínimo de `{config.threshold_score:.0%}`\n\n"
+                f"💡 As vagas encontradas eram de tecnologias fora do seu perfil.\n"
+                f"Acesse /admin/vagas para ver todas."
+            )
+            await telegram.enviar_mensagem_simples(msg)
+            registrador.registrar_log("Telegram: notificação de zero match enviada.")
+        elif novas_salvas == 0:
+            registrador.registrar_log("Nenhuma vaga nova neste ciclo. Telegram silencioso.")
 
         # ── 7. registrar execução ─────────────────────────────────────────
         fim = datetime.now(timezone.utc)
