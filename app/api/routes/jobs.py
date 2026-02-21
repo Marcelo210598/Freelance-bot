@@ -11,6 +11,8 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
+from pydantic import BaseModel
+
 from app.api.middleware import verificar_token
 from app.api.schemas import (
     AtualizarFinalInput,
@@ -21,6 +23,12 @@ from app.api.schemas import (
 )
 from app.core.database import obter_sessao
 from app.core.models import Candidatura, PontuacaoVaga, StatusCandidatura, Vaga
+
+
+class CandidaturaResp(BaseModel):
+    vaga_id: int
+    status: str
+
 
 roteador = APIRouter(prefix="/api/jobs", tags=["vagas"])
 TokenDep = Annotated[str, Depends(verificar_token)]
@@ -151,9 +159,3 @@ async def atualizar_final(
     return {"vaga_id": vaga_id, "valor_final": cand.valor_final, "prazo_final": cand.prazo_final}
 
 
-# schema mínimo para resposta de status (evita importação circular)
-from pydantic import BaseModel
-
-class CandidaturaResp(BaseModel):
-    vaga_id: int
-    status: str
