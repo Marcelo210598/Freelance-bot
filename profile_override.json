@@ -1,0 +1,28 @@
+{
+  "resumo": "Desenvolvedor full-stack com foco em Python, TypeScript e Next.js. Especialista em APIs REST, automação, integração de sistemas e deploy em cloud (Railway, Vercel, Neon).",
+  "habilidades": [
+    "Python (FastAPI, Flask, automação)",
+    "TypeScript / JavaScript (Next.js 15, React 19)",
+    "PostgreSQL / Neon / Redis",
+    "Docker / Railway / Vercel",
+    "Web Scraping (BeautifulSoup, Playwright)",
+    "Telegram Bots",
+    "APIs REST e integrações",
+    "Prisma ORM / SQLAlchemy",
+    "Tailwind CSS / shadcn/ui",
+    "Git / GitHub Actions"
+  ],
+  "areas": [
+    "Desenvolvimento full-stack",
+    "Automação e bots",
+    "APIs e integrações",
+    "Dashboards e painéis admin",
+    "Deploy e infraestrutura cloud"
+  ],
+  "projetos_destaque": [
+    "Bot de airdrop farming com estratégia EMA e stop-loss automático",
+    "Dashboard Meridian.AI para rastreamento de airdrops (Next.js + Prisma + Neon)",
+    "Sistema de controle de trocas freelance (Next.js + PostgreSQL)",
+    "Site de imóveis com SSR e SEO otimizado (Next.js)"
+  ]
+}

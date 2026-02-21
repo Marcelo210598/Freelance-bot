@@ -1,0 +1,39 @@
+# ── Python ────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# ── Ambiente ───────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Modelos ML (grandes demais pro git) ───────────────
+.cache/
+models/
+
+# ── Histórico de execuções (logs de runtime) ──────────
+# DEVLOG.md e arquivos .md de desenvolvimento SIM commitamos
+# Apenas logs e JSONs de execução são ignorados (opcionais)
+# history/*/run_*.json
+# history/*/run_*.log
+# descomente as linhas acima se não quiser commitar execuções
+
+# ── Node.js ───────────────────────────────────────────
+node_modules/
+.next/
+out/
+
+# ── Banco de dados local ──────────────────────────────
+*.db
+*.sqlite
+
+# ── Sistema ───────────────────────────────────────────
+.DS_Store
+*.log

@@ -1,0 +1,75 @@
+{
+  "status": "success",
+  "result": {
+    "projects": [
+      {
+        "id": 99001,
+        "title": "API REST Python FastAPI para fintech",
+        "seo_url": "api-rest-python-fastapi-fintech-99001",
+        "preview_description": "Precisamos de uma API robusta em FastAPI para nossa fintech. Inclui autenticação OAuth2, endpoints de transações, integração com banco de dados PostgreSQL e deploy via Docker.",
+        "budget": {
+          "minimum": 500,
+          "maximum": 1500,
+          "currency": {
+            "id": 76,
+            "code": "BRL",
+            "sign": "R$"
+          }
+        },
+        "time_submitted": 1708473600,
+        "time_updated": 1708473600,
+        "jobs": [
+          {"id": 3, "name": "Python"},
+          {"id": 9, "name": "FastAPI"},
+          {"id": 7, "name": "PostgreSQL"},
+          {"id": 15, "name": "Docker"}
+        ]
+      },
+      {
+        "id": 99002,
+        "title": "Website WordPress para empresa",
+        "seo_url": "website-wordpress-empresa-99002",
+        "preview_description": "Criar site institucional em WordPress com tema customizado, plugins de contato e integração com Google Analytics.",
+        "budget": {
+          "minimum": 100,
+          "maximum": 300,
+          "currency": {
+            "id": 76,
+            "code": "BRL",
+            "sign": "R$"
+          }
+        },
+        "time_submitted": 1708470000,
+        "time_updated": 1708470000,
+        "jobs": [
+          {"id": 100, "name": "WordPress"},
+          {"id": 101, "name": "PHP"},
+          {"id": 102, "name": "CSS"}
+        ]
+      },
+      {
+        "id": 99003,
+        "title": "Dashboard Next.js com gráficos em tempo real",
+        "seo_url": "dashboard-nextjs-graficos-realtime-99003",
+        "preview_description": "Dashboard analítico com Next.js 14, gráficos Chart.js, WebSocket para dados em tempo real e autenticação NextAuth. Responsivo e cross-browser.",
+        "budget": {
+          "minimum": 800,
+          "maximum": 2000,
+          "currency": {
+            "id": 76,
+            "code": "BRL",
+            "sign": "R$"
+          }
+        },
+        "time_submitted": 1708476000,
+        "time_updated": 1708476000,
+        "jobs": [
+          {"id": 3, "name": "Next.js"},
+          {"id": 9, "name": "TypeScript"},
+          {"id": 7, "name": "React"},
+          {"id": 15, "name": "WebSocket"}
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+version: "3.9"
+
+# ── Uso local para desenvolvimento ────────────────────────────────────────────
+# cp .env.example .env && docker compose up --build
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    env_file: .env
+    volumes:
+      - ./history:/app/history  # persiste histórico localmente
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    env_file: .env
+    volumes:
+      - ./history:/app/history
+    restart: unless-stopped
+    depends_on:
+      - api
