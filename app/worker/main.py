@@ -29,14 +29,13 @@ async def main() -> None:
 
     scheduler = AsyncIOScheduler()
 
-    # ── job principal: coleta de vagas ────────────────────────────────────
     scheduler.add_job(
         executar_ciclo,
         trigger=IntervalTrigger(minutes=cfg.freq_minutos),
         id="ciclo_principal",
         name="Coleta de vagas freelance",
-        max_instances=1,      # evita sobreposição
-        coalesce=True,        # se atrasou, roda uma única vez
+        max_instances=1,
+        coalesce=True,
         replace_existing=True,
     )
 
@@ -49,24 +48,21 @@ async def main() -> None:
     # roda o primeiro ciclo imediatamente sem esperar o intervalo
     await executar_ciclo()
 
-    # mantém o processo vivo
-    loop = asyncio.get_event_loop()
+    # usa asyncio.Event para encerramento limpo (evita loop.stop())
+    shutdown_event = asyncio.Event()
 
     def _encerrar(*_):
         logger.info("Sinal de encerramento recebido. Parando scheduler...")
-        scheduler.shutdown(wait=False)
-        loop.stop()
+        if scheduler.running:
+            scheduler.shutdown(wait=False)
+        shutdown_event.set()
 
     signal.signal(signal.SIGTERM, _encerrar)
     signal.signal(signal.SIGINT, _encerrar)
 
-    try:
-        await asyncio.Event().wait()  # bloqueia para sempre
-    except asyncio.CancelledError:
-        pass
-    finally:
-        scheduler.shutdown(wait=True)
-        logger.info("Worker encerrado.")
+    logger.info("Worker aguardando próximo ciclo...")
+    await shutdown_event.wait()
+    logger.info("Worker encerrado.")
 
 
 if __name__ == "__main__":
